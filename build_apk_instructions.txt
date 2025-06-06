@@ -1,0 +1,53 @@
+# 在Windows上使用Buildozer构建APK的步骤
+
+## 方法1：使用WSL (推荐)
+
+1. 启用WSL：
+   - 以管理员身份打开PowerShell
+   - 运行：`wsl --install`
+   - 重启电脑
+
+2. 安装Ubuntu：
+   - 从Microsoft Store安装Ubuntu
+
+3. 在WSL中设置环境：
+   ```bash
+   sudo apt update
+   sudo apt upgrade
+   sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+   
+   pip3 install --user --upgrade buildozer
+   ```
+
+4. 将项目文件复制到WSL：
+   - 在WSL中访问Windows文件：`cd /mnt/c/用户/你的用户名/...`
+
+5. 构建APK：
+   ```bash
+   buildozer init
+   buildozer android debug
+   ```
+
+## 方法2：使用Docker
+
+1. 安装Docker Desktop for Windows
+2. 运行：
+   ```bash
+   docker run --interactive --tty --rm \
+   --volume "%cd%":/home/user/hostcwd \
+   --volume "%HOME%/.buildozer":/home/user/.buildozer \
+   kivy/buildozer android debug
+   ```
+
+## 方法3：使用云服务
+
+可以考虑使用Google Colab或GitHub Actions进行远程构建
+
+## 注意事项
+
+1. 首次构建会下载Android SDK/NDK等工具，耗时较长
+2. 确保有足够的磁盘空间(约10GB)
+3. 构建完成后APK文件位于bin目录
+4. 可能需要调整buildozer.spec中的配置
+
+如需更详细的指导，请参考Kivy官方文档：https://kivy.org/doc/stable/guide/packaging-android.html

@@ -1,0 +1,8 @@
+# 项目核心依赖项
+kivy>=2.0.0
+Pillow>=8.0.0
+numpy>=1.19.0
+
+# 可选依赖项 (用于CAD文件预览)
+# FreeCAD>=0.19 (需要单独安装)
+# ODAFileConverter (需要单独安装)

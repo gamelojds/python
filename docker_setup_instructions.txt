@@ -1,0 +1,43 @@
+# Docker环境设置指南
+
+## 1. 验证Docker安装
+请确保您已经：
+- 下载并安装了Docker Desktop for Windows
+- 已启动Docker服务
+
+## 2. 检查Docker服务状态
+在PowerShell中运行：
+```powershell
+Get-Service docker
+```
+应该显示"Running"状态
+
+## 3. 设置环境变量
+如果Docker命令仍不可用，请：
+1. 右键"此电脑" → 属性 → 高级系统设置
+2. 点击"环境变量"
+3. 在系统变量中找到Path，添加Docker安装路径(通常是C:\Program Files\Docker\Docker\resources\bin)
+
+## 4. 重启终端
+完成上述步骤后，请关闭并重新打开PowerShell
+
+## 5. 验证Docker命令
+运行：
+```powershell
+docker --version
+```
+应该显示Docker版本信息
+
+## 6. 构建APK
+确认Docker正常工作后，再次尝试运行：
+```powershell
+docker run --interactive --tty --rm --volume "${pwd}":/home/user/hostcwd --volume "${env:USERPROFILE}/.buildozer":/home/user/.buildozer kivy/buildozer android debug
+```
+
+## 注意事项
+1. 确保Docker Desktop正在运行(任务栏有Docker图标)
+2. 可能需要以管理员身份运行PowerShell
+3. 首次运行会下载较大的镜像文件(约2GB)
+4. 构建过程可能需要30分钟到1小时
+
+如果仍有问题，建议考虑使用WSL方案，通常更稳定可靠。
