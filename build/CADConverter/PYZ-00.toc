@@ -1,1 +1,0 @@
-('D:\\python\\build\\CADConverter\\PYZ-00.pyz', [])
